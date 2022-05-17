@@ -32,7 +32,7 @@ server.listen(() => {
 ##### ./app.js
 
 ```js
-const Router = require("coap-router");
+const Router = require("coap-router-full");
 const app = Router();
 
 app.get("/", (req, res) => {
