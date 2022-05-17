@@ -1,7 +1,8 @@
-# coap-router [![npm version](https://badge.fury.io/js/coap-router.svg)](https://badge.fury.io/js/coap-router)
+# coap-router [![npm version](https://badge.fury.io/js/coap-router-full.svg)](https://badge.fury.io/js/coap-router-full)
 A quick demo on how to leverage web router to build [CoAP (Constrained Application Protocol)](https://en.wikipedia.org/wiki/Constrained_Application_Protocol) server.
 
-
+## Reference the source code
+[Github](https://github.com/MagicCube/coap-router)
 
 ## 1. Motivation
 Currently I'm working on a Node.js based IoT (Internet of Things) platform. It allows Node.js powered DTU (Data Transfer Unit) to serve as CoAP server on smart devices like Raspberry PI.
