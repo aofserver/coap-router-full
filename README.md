@@ -66,6 +66,14 @@ router.get("/:testparams", (req, res) => {
     });
     res.end();
 });
+
+function writeJSON(res, json)
+{
+    res.setOption("Content-Format", "application/json");
+    res.write(JSON.stringify(json));
+}
+
+module.exports = router;
 ```
 
 
