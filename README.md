@@ -42,6 +42,32 @@ app.get("/", (req, res) => {
 app.use("/thermometer", require("./routes/thermometer"));
 ```
 
+##### ./routes/test.js
+```js
+const Router = require("../../lib/router");
+const router = Router();
+
+
+router.get("/", (req, res) => {
+    // route to "/test/"
+    writeJSON(res, {
+        test: "test"
+    });
+    res.end();
+});
+
+router.get("/:testparams", (req, res) => {
+    // route to "/test/:testparams"
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    writeJSON(res, {
+        test: "test",
+        timestamp: new Date().getTime()
+    });
+    res.end();
+});
+```
+
 
 ##### ./routes/thermometer.js
 ```js
@@ -66,6 +92,14 @@ router.get("/temperature", (req, res) => {
     });
     res.end();
 });
+
+function writeJSON(res, json)
+{
+    res.setOption("Content-Format", "application/json");
+    res.write(JSON.stringify(json));
+}
+
+module.exports = router;
 ```
 
 
