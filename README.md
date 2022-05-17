@@ -1,4 +1,4 @@
-# coap-router [![npm version](https://badge.fury.io/js/coap-router-full.svg)](https://badge.fury.io/js/coap-router-full)
+# coap-router-full [![npm version](https://badge.fury.io/js/coap-router-full.svg)](https://badge.fury.io/js/coap-router-full)
 A quick demo on how to leverage web router to build [CoAP (Constrained Application Protocol)](https://en.wikipedia.org/wiki/Constrained_Application_Protocol) server.
 
 ## Reference the source code
