@@ -79,40 +79,6 @@ module.exports = router;
 ```
 
 
-##### ./routes/thermometer.js
-```js
-const Router = require("../../lib/router");
-const router = Router();
-const thermometer = require("../sensors/thermometer");
-router.get("/", (req, res) => {
-    // route to "/thermometer/"
-    writeJSON(res, {
-        temperature: thermometer.temperature,
-        humidity: thermometer.humidity,
-        timestamp: new Date().getTime()
-    });
-    res.end();
-});
-
-router.get("/temperature", (req, res) => {
-    // route to "/thermometer/temperature"
-    writeJSON(res, {
-        temperature: thermometer.temperature,
-        timestamp: new Date().getTime()
-    });
-    res.end();
-});
-
-function writeJSON(res, json)
-{
-    res.setOption("Content-Format", "application/json");
-    res.write(JSON.stringify(json));
-}
-
-module.exports = router;
-```
-
-
 
 ## 3. How to Install
 ### 3.1 Basic Requirements
@@ -163,9 +129,6 @@ $ coap
    $ coap get coap://localhost/test
    $ coap get coap://localhost/test/abc
    $ coap get coap://localhost/test/abc?de=fg
-   $ coap get coap://localhost/thermometer
-   $ coap get coap://localhost/thermometer/temperature
-   $ coap get coap://localhost/thermometer/humidity
    ```
 
 4. Get the latest resource immediately after it has been changed (observing mode).
