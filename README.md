@@ -40,14 +40,15 @@ app.get("/", (req, res) => {
     res.end("Hello, world");
 });
 
-app.use("/thermometer", require("./routes/thermometer"));
+app.use("/test", require("./routes/test"));
+
+module.exports = app;
 ```
 
 ##### ./routes/test.js
 ```js
-const Router = require("../../lib/router");
+const Router = require("coap-router-full");
 const router = Router();
-
 
 router.get("/", (req, res) => {
     // route to "/test/"
