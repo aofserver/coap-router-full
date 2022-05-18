@@ -131,10 +131,4 @@ $ coap
    $ coap get coap://localhost/test/abc?de=fg
    ```
 
-4. Get the latest resource immediately after it has been changed (observing mode).
-
-   ```sh
-   $ coap observe coap://localhost/thermometer/ -o
-   ```
-
    ​
