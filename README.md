@@ -1,4 +1,4 @@
-# coap-router [![npm version](https://badge.fury.io/js/coap-router-full.svg)](https://badge.fury.io/js/coap-router-full)
+# coap-router-full [![npm version](https://badge.fury.io/js/coap-router-full.svg)](https://badge.fury.io/js/coap-router-full)
 A quick demo on how to leverage web router to build [CoAP (Constrained Application Protocol)](https://en.wikipedia.org/wiki/Constrained_Application_Protocol) server.
 
 ## Reference the source code
@@ -40,14 +40,15 @@ app.get("/", (req, res) => {
     res.end("Hello, world");
 });
 
-app.use("/thermometer", require("./routes/thermometer"));
+app.use("/test", require("./routes/test"));
+
+module.exports = app;
 ```
 
 ##### ./routes/test.js
 ```js
-const Router = require("../../lib/router");
+const Router = require("coap-router-full");
 const router = Router();
-
 
 router.get("/", (req, res) => {
     // route to "/test/"
@@ -63,40 +64,6 @@ router.get("/:testparams", (req, res) => {
     console.log("[ params ]",req.params)
     writeJSON(res, {
         test: "test",
-        timestamp: new Date().getTime()
-    });
-    res.end();
-});
-
-function writeJSON(res, json)
-{
-    res.setOption("Content-Format", "application/json");
-    res.write(JSON.stringify(json));
-}
-
-module.exports = router;
-```
-
-
-##### ./routes/thermometer.js
-```js
-const Router = require("../../lib/router");
-const router = Router();
-const thermometer = require("../sensors/thermometer");
-router.get("/", (req, res) => {
-    // route to "/thermometer/"
-    writeJSON(res, {
-        temperature: thermometer.temperature,
-        humidity: thermometer.humidity,
-        timestamp: new Date().getTime()
-    });
-    res.end();
-});
-
-router.get("/temperature", (req, res) => {
-    // route to "/thermometer/temperature"
-    writeJSON(res, {
-        temperature: thermometer.temperature,
         timestamp: new Date().getTime()
     });
     res.end();
@@ -162,15 +129,6 @@ $ coap
    $ coap get coap://localhost/test
    $ coap get coap://localhost/test/abc
    $ coap get coap://localhost/test/abc?de=fg
-   $ coap get coap://localhost/thermometer
-   $ coap get coap://localhost/thermometer/temperature
-   $ coap get coap://localhost/thermometer/humidity
-   ```
-
-4. Get the latest resource immediately after it has been changed (observing mode).
-
-   ```sh
-   $ coap observe coap://localhost/thermometer/ -o
    ```
 
    ​

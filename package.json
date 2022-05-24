@@ -1,5 +1,5 @@
 {
-  "name": "coap-router",
+  "name": "coap-router-full",
   "version": "1.0.0",
   "description": "A quick demo on how to leverage web router to build CoAP server.",
   "main": "lib/router.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MagicCube/coap-router.git"
+    "url": "git+https://github.com/aofserver/coap-router-full.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MagicCube/coap-router/issues"
+    "url": "https://github.com/aofserver/coap-router-full/issues"
   },
-  "homepage": "https://github.com/MagicCube/coap-router#readme",
+  "homepage": "https://github.com/MagicCube/coap-router-full#readme",
   "dependencies": {
     "coap": "^0.17.0"
   }

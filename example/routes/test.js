@@ -3,6 +3,9 @@ const router = Router();
 
 
 router.get("/", (req, res) => {
+    console.log("[ payload ]",req.payload.toString())
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
     writeJSON(res, {
         test: "test"
     });
@@ -10,10 +13,22 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:testparams", (req, res) => {
+    console.log("[ payload ]",req.payload.toString())
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
     writeJSON(res, {
         test: "test",
+        timestamp: new Date().getTime()
+    });
+    res.end();
+});
+
+router.get("/:abc/abc", (req, res) => {
+    console.log("[ payload ]",req.payload.toString())
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    writeJSON(res, {
+        test: "test test",
         timestamp: new Date().getTime()
     });
     res.end();
