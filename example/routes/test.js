@@ -34,7 +34,10 @@ router.get("/:abc/abc", (req, res) => {
     res.end();
 });
 
-
+router.all("/", (req, res) => {
+    res.statusCode = '4.04'
+    res.end("Not Found");
+});
 
 function writeJSON(res, json)
 {
