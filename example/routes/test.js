@@ -12,32 +12,37 @@ router.get("/", (req, res) => {
     res.end();
 });
 
-router.get("/:testparams", (req, res) => {
-    console.log("[ payload ]",req.payload.toString())
-    console.log("[ query ]",req.query)
-    console.log("[ params ]",req.params)
-    writeJSON(res, {
-        test: "test",
-        timestamp: new Date().getTime()
-    });
-    res.end();
-});
 
-router.get("/:abc/abc", (req, res) => {
-    console.log("[ payload ]",req.payload.toString())
-    console.log("[ query ]",req.query)
-    console.log("[ params ]",req.params)
-    writeJSON(res, {
-        test: "test test",
-        timestamp: new Date().getTime()
-    });
-    res.end();
-});
 
-router.all("/", (req, res) => {
-    res.statusCode = '4.04'
-    res.end("Not Found");
-});
+
+// router.get("/:testparams", (req, res) => {
+//     console.log("[ payload ]",req.payload.toString())
+//     console.log("[ query ]",req.query)
+//     console.log("[ params ]",req.params)
+//     writeJSON(res, {
+//         test: "test",
+//         timestamp: new Date().getTime()
+//     });
+//     res.end();
+// });
+
+// router.get("/:abc/abc", (req, res) => {
+//     console.log("[ payload ]",req.payload.toString())
+//     console.log("[ query ]",req.query)
+//     console.log("[ params ]",req.params)
+//     writeJSON(res, {
+//         test: "test test",
+//         timestamp: new Date().getTime()
+//     });
+//     res.end();
+// });
+
+
+// router.all("/", (req, res) => {
+//     res.code = 404
+//     res.end("Not Found");
+// });
+
 
 function writeJSON(res, json)
 {

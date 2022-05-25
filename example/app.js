@@ -9,6 +9,7 @@ GET /thermometer observe - Immediately get the above information when changed.
 GET /thermometer/temperature - Get the current temperature only.
 GET /thermometer/humidity - Get the current humidity only.`
 
+
 app.get("/", (req, res) => {
     res.end(app.help);
 });
