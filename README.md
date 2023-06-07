@@ -158,6 +158,7 @@ $ coap
    $ coap post "coap://127.0.0.1:5683/test"
    $ coap get "coap://127.0.0.1:5683/test/abc?de=fg"
    $ coap post "coap://127.0.0.1:5683/test/abc?de=fg" -p "{'temp':100}"
+   $ coap post "coap://localhost/test/echo" -p "{'abc':123}"
    ```
 
    ​
