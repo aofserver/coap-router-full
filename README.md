@@ -127,6 +127,7 @@ $ npm install
 or
 ```sh
 $ npm i coap
+$ npm i coap-router-full
  ```
 
 
