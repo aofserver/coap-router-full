@@ -42,6 +42,11 @@ app.get("/", (req, res) => {
 
 app.use("/test", require("./routes/test"));
 
+app.all("/", (req, res) => {
+    res.code = 404
+    res.end(Buffer.from(JSON.stringify({ msg: 'Not Found' })));
+});
+
 module.exports = app;
 ```
 
