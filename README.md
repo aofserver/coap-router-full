@@ -124,6 +124,10 @@ module.exports = router;
 ```sh
 $ npm install
 ```
+or
+```sh
+$ npm i coap
+ ```
 
 
 
@@ -143,11 +147,6 @@ $ coap
 1. Start example server. By default the CoAP server is listening at port 5683.
    ```sh
    $ npm start
-   ```
-    or
-   ```sh
-   $ npm i coap
-   $ npm i coap-router-full
    ```
 
 2. Get literal resource.
