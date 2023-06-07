@@ -47,25 +47,58 @@ module.exports = app;
 
 ##### ./routes/test.js
 ```js
-const Router = require("coap-router-full");
+const Router = require("../../lib/router");
 const router = Router();
 
 router.get("/", (req, res) => {
-    // route to "/test/"
-    writeJSON(res, {
-        test: "test"
-    });
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
+    writeJSON(res, { test: "test api get." });
+    res.end();
+});
+
+router.post("/", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
+
+    writeJSON(res, { test: "test api post." });
+    res.end();
+});
+
+router.post("/echo", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
+
+    let resp = { ...JSON.parse(req.payload) ,timestamp: new Date().getTime() }
+    writeJSON(res, resp);
     res.end();
 });
 
 router.get("/:testparams", (req, res) => {
-    // route to "/test/:testparams"
+    console.log("[ payload ]",req.payload)
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
-    writeJSON(res, {
-        test: "test",
-        timestamp: new Date().getTime()
-    });
+    console.log("\n")
+
+    let resp = { timestamp: new Date().getTime() }
+    writeJSON(res, resp);
+    res.end();
+});
+
+router.post("/:testparams", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
+
+    let resp = { timestamp: new Date().getTime() }
+    writeJSON(res, resp);
     res.end();
 });
 
@@ -113,22 +146,18 @@ $ coap
    $ npm start
    ```
 
-   ​
-
 2. Get literal resource.
 
    ```sh
-   $ coap get coap://localhost/
+   $ coap get "coap://127.0.0.1:5683/"
    ```
 
-   ​
-
-3. Get JSON resource.
-
+2. TEST API.
    ```sh
-   $ coap get coap://localhost/test
-   $ coap get coap://localhost/test/abc
-   $ coap get coap://localhost/test/abc?de=fg
+   $ coap get "coap://127.0.0.1:5683/test"
+   $ coap post "coap://127.0.0.1:5683/test"
+   $ coap get "coap://127.0.0.1:5683/test/abc?de=fg"
+   $ coap post "coap://127.0.0.1:5683/test/abc?de=fg" -p "{'temp':100}"
    ```
 
    ​

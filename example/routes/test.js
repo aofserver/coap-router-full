@@ -3,46 +3,56 @@ const router = Router();
 
 
 router.get("/", (req, res) => {
-    console.log("[ payload ]",req.payload.toString())
+    console.log("[ payload ]",req.payload)
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
-    writeJSON(res, {
-        test: "test"
-    });
+    console.log("\n")
+    writeJSON(res, { test: "test api get." });
     res.end();
 });
 
+router.post("/", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
 
+    writeJSON(res, { test: "test api post." });
+    res.end();
+});
 
+router.post("/echo", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
 
-// router.get("/:testparams", (req, res) => {
-//     console.log("[ payload ]",req.payload.toString())
-//     console.log("[ query ]",req.query)
-//     console.log("[ params ]",req.params)
-//     writeJSON(res, {
-//         test: "test",
-//         timestamp: new Date().getTime()
-//     });
-//     res.end();
-// });
+    let resp = { ...JSON.parse(req.payload) ,timestamp: new Date().getTime() }
+    writeJSON(res, resp);
+    res.end();
+});
 
-// router.get("/:abc/abc", (req, res) => {
-//     console.log("[ payload ]",req.payload.toString())
-//     console.log("[ query ]",req.query)
-//     console.log("[ params ]",req.params)
-//     writeJSON(res, {
-//         test: "test test",
-//         timestamp: new Date().getTime()
-//     });
-//     res.end();
-// });
+router.get("/:testparams", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
 
+    let resp = { timestamp: new Date().getTime() }
+    writeJSON(res, resp);
+    res.end();
+});
 
-// router.all("/", (req, res) => {
-//     res.code = 404
-//     res.end("Not Found");
-// });
+router.post("/:testparams", (req, res) => {
+    console.log("[ payload ]",req.payload)
+    console.log("[ query ]",req.query)
+    console.log("[ params ]",req.params)
+    console.log("\n")
 
+    let resp = { timestamp: new Date().getTime() }
+    writeJSON(res, resp);
+    res.end();
+});
 
 function writeJSON(res, json)
 {
