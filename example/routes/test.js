@@ -7,8 +7,8 @@ router.get("/", (req, res) => {
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
     console.log("\n")
-    writeJSON(res, { test: "test api get." });
-    res.end();
+
+    res.status(200).json({ test: "test api get." });
 });
 
 router.post("/", (req, res) => {
@@ -16,9 +16,7 @@ router.post("/", (req, res) => {
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
     console.log("\n")
-
-    writeJSON(res, { test: "test api post." });
-    res.end();
+    res.status(200).json({ test: "test api post." });
 });
 
 router.post("/echo", (req, res) => {
@@ -28,8 +26,7 @@ router.post("/echo", (req, res) => {
     console.log("\n")
 
     let resp = { ...JSON.parse(req.payload) ,timestamp: new Date().getTime() }
-    writeJSON(res, resp);
-    res.end();
+    res.status(200).json(resp);
 });
 
 router.get("/:testparams", (req, res) => {
@@ -39,8 +36,7 @@ router.get("/:testparams", (req, res) => {
     console.log("\n")
 
     let resp = { timestamp: new Date().getTime() }
-    writeJSON(res, resp);
-    res.end();
+    res.status(200).json(resp);
 });
 
 router.post("/:testparams", (req, res) => {
@@ -50,14 +46,8 @@ router.post("/:testparams", (req, res) => {
     console.log("\n")
 
     let resp = { timestamp: new Date().getTime() }
-    writeJSON(res, resp);
-    res.end();
+    res.status(200).json(resp);
 });
 
-function writeJSON(res, json)
-{
-    res.setOption("Content-Format", "application/json");
-    res.write(JSON.stringify(json));
-}
 
 module.exports = router;

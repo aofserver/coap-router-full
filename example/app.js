@@ -8,21 +8,14 @@ Usage:
  POST /test --- Test api post.
  GET  /test/abc?de=fg --- Test api get with query string.
  POST /test/abc?de=fg -p "{'temp':100}" --- Test api post with query string and payload.`
-
-
+ 
+app.code404 = 404
+app.error404 = { msg: 'Not Found API' }
 
 app.get("/", (req, res) => {
-    res.end(app.help);
+    res.status(200).end(app.help);
 });
 
 app.use("/test", require("./routes/test"))
-
-
-app.all("/", (req, res) => {
-    res.code = 404
-    res.end(Buffer.from(JSON.stringify({ msg: 'Not Found' })));
-});
-
-
 
 module.exports = app;

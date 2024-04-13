@@ -26,7 +26,7 @@ const coap = require("coap");
 const app = require("./app");
 const server = coap.createServer(app);
 server.listen(() => {
-    console.log("The CoAP server is now running.\n" + app.help);
+    console.log("The CoAP server is now running port 5683.\n" + app.help);
 });
 ```
 
@@ -36,23 +36,29 @@ server.listen(() => {
 const Router = require("coap-router-full");
 const app = Router();
 
+app.help = `URL: coap://127.0.0.1:5683/
+Usage:
+ GET  / - Display this help document.
+ GET  /test --- Test api get.
+ POST /test --- Test api post.
+ GET  /test/abc?de=fg --- Test api get with query string.
+ POST /test/abc?de=fg -p "{'temp':100}" --- Test api post with query string and payload.`
+
+app.code404 = 404
+app.error404 = { msg: 'Not Found API' }
+
 app.get("/", (req, res) => {
-    res.end("Hello, world");
+    res.status(200).end("Hello, world");
 });
 
 app.use("/test", require("./routes/test"));
-
-app.all("/", (req, res) => {
-    res.code = 404
-    res.end(Buffer.from(JSON.stringify({ msg: 'Not Found' })));
-});
 
 module.exports = app;
 ```
 
 ##### ./routes/test.js
 ```js
-const Router = require("../../lib/router");
+const Router = require("coap-router-full");
 const router = Router();
 
 router.get("/", (req, res) => {
@@ -60,8 +66,8 @@ router.get("/", (req, res) => {
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
     console.log("\n")
-    writeJSON(res, { test: "test api get." });
-    res.end();
+
+    res.status(200).json({ test: "test api get." });
 });
 
 router.post("/", (req, res) => {
@@ -70,8 +76,7 @@ router.post("/", (req, res) => {
     console.log("[ params ]",req.params)
     console.log("\n")
 
-    writeJSON(res, { test: "test api post." });
-    res.end();
+    res.status(200).json({ test: "test api post." });
 });
 
 router.post("/echo", (req, res) => {
@@ -81,8 +86,7 @@ router.post("/echo", (req, res) => {
     console.log("\n")
 
     let resp = { ...JSON.parse(req.payload) ,timestamp: new Date().getTime() }
-    writeJSON(res, resp);
-    res.end();
+    res.status(200).json(resp);
 });
 
 router.get("/:testparams", (req, res) => {
@@ -92,8 +96,7 @@ router.get("/:testparams", (req, res) => {
     console.log("\n")
 
     let resp = { timestamp: new Date().getTime() }
-    writeJSON(res, resp);
-    res.end();
+    res.status(200).json(resp);
 });
 
 router.post("/:testparams", (req, res) => {
@@ -103,15 +106,8 @@ router.post("/:testparams", (req, res) => {
     console.log("\n")
 
     let resp = { timestamp: new Date().getTime() }
-    writeJSON(res, resp);
-    res.end();
+    res.status(200).json(resp);
 });
-
-function writeJSON(res, json)
-{
-    res.setOption("Content-Format", "application/json");
-    res.write(JSON.stringify(json));
-}
 
 module.exports = router;
 ```
