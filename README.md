@@ -24,9 +24,19 @@ Let's take a look at the example.
 ```js
 const coap = require("coap");
 const app = require("./app");
+
+const coapTiming = {
+    ackTimeout: 0.25,
+    ackRandomFactor: 1.0,
+    maxRetransmit: 3,
+    maxLatency: 2,
+    piggybackReplyMs: 10
+}
+coap.updateTiming(coapTiming)
 const server = coap.createServer(app);
-server.listen(() => {
-    console.log("The CoAP server is now running port 5683.\n" + app.help);
+var PORT = 5683
+server.listen(PORT, () => {
+    console.log(`The CoAP server is now running port ${PORT}.\n` + app.help);
 });
 ```
 
@@ -61,7 +71,12 @@ module.exports = app;
 const Router = require("coap-router-full");
 const router = Router();
 
-router.get("/", (req, res) => {
+function Middleware(req, res, next) {
+    console.log("Middleware.")
+    next()
+}
+
+router.get("/", Middleware, (req, res) => {
     console.log("[ payload ]",req.payload)
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)

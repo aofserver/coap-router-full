@@ -1,8 +1,12 @@
 const Router = require("../../lib/router");
 const router = Router();
 
+function Middleware(req, res, next) {
+    console.log("Middleware.")
+    next()
+}
 
-router.get("/", (req, res) => {
+router.get("/", Middleware, (req, res) => {
     console.log("[ payload ]",req.payload)
     console.log("[ query ]",req.query)
     console.log("[ params ]",req.params)
@@ -48,6 +52,8 @@ router.post("/:testparams", (req, res) => {
     let resp = { timestamp: new Date().getTime() }
     res.status(200).json(resp);
 });
+
+
 
 
 module.exports = router;
